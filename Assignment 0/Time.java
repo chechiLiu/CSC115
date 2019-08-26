@@ -58,7 +58,7 @@ public class Time {
 		
 		if (sumMinutes >= 60) {
 			sumHours += 1;
-			sumMinute -= 60;
+			sumMinutes -= 60;
 		}
 		
 		this.hours = sumHours%24;

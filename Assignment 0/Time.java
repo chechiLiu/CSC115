@@ -66,7 +66,7 @@ public class Time {
 	}
 	
 	//Testing
-	public static void main (String[] args) {
+	public static void main(String[] args) {
 		Time t1 = new Time(12, 50);
 		System.out.println("Hours is " + t1.getHours());
 		System.out.println("Minutes is " + t1.getMinutes());

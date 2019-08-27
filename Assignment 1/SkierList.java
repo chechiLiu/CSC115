@@ -39,8 +39,7 @@ public class SkierList {
 		if(index >= skiers.length || index < 0) {
 			System.out.println("The input index is out of range, nothing is removed.");
 		}else {
-			count = count-1;
-			Skier temp = new Skier[count];
+			Skier[] temp = new Skier[skiers.length-1];
 			for(int i = 0, k = 0; i < skiers.length; i++) {
             			if(i == index) { 
                 			continue; 
@@ -48,6 +47,7 @@ public class SkierList {
             			temp[k++] = skiers[i];
 			}
 			skiers = temp;
+			count = count-1;
 		}
 	}
 	

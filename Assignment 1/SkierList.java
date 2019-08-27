@@ -1,113 +1,84 @@
-//Che-Chi Jack Liu
+//Che-Chi (Jack) Liu
 //V00850558
- 
 
 /*
  * Class SkierList is a list of Skiers in no particular order.
  */
- 
+
 public class SkierList {
-// Programmer note: Do not alter the following instance variables.
 	private Skier[] skiers; // array storage for skiers
 	private int count; // the number of skiers in the list
+	
 	// the following is the initial size of the empty skiers array.
 	private static final int INITIAL_CAP = 3;
-
-/*
- * Programmer note: Each of the methods below are not complete and
- * need to be implemented by you.
- * Make sure you provide method header comments and provide
- * the implementation code.
- * Make sure you test regularly for compilation and errors.
- * It is recommended that you reference the completed main method,
- * where each of your methods is tested;
- * follow that ordering so you can monitor your progress.
- */
+	
 	//Creates a SkierList that is empty.
 	public SkierList() {
-		// Programmer note: Initialize the skiers array to hold INITIAL_CAP Skier objects.
-		skiers = new Skier [INITIAL_CAP];
-		int count = 0; 
+		skiers = new Skier[INITIAL_CAP];
+		count = 0;
 	}
 	
 	//The number of Skiers in the list.
 	public int size() {
-		// Programmer note: The following is placeholder.
 		return count;
 	}
 	
-	//Accesses the skier in the list by their position index. 
+	//Accesses the skier in the list by their position index.
 	//If the index is out of range of the list, then null is returned.
-	public Skier get(int index) {	
-		// Programmer note: The following is a placeholder.
-		if (index > skiers.length) {
+	public Skier get(int index) {
+		if(index >= skiers.length || index < 0) {
 			return null;
 		}else {
-			return skiers [index];
+			return skiers[index];
 		}
 	}
 	
 	//Removes the skier at the index posiiton from the list. 
 	//If the index is out of range, then nothing is removed.
 	public void remove(int index) {
-		if(index > skiers.length) {
-				break;
+		if(index >= skiers.length || index < 0) {
+			System.out.println("The input index is out of range, nothing is removed.");
 		}else {
-			skiers [index] = (new Skier("", -1));
-			count = count - 1;
-			for(int i=index; i<skiers.length-1; i++) {
-				skiers [i] = skiers[i+1];
+			count = count-1;
+			Skier temp = new Skier[count];
+			for(int i = 0, k = 0; i < skiers.length; i++) {
+            			if(i == index) { 
+                			continue; 
+            			}
+            			temp[k++] = skiers[i];
 			}
+			skiers = temp;
 		}
 	}
 	
 	//Adds a skier to the list, in no particular position in the list.
 	public void add(Skier skier) {
-	/*
-	 * Programmer note: If the skiers array is full, it needs to be
-	 * replaced with a larger array. It has been proven by algorithm efficiency
-	 * experts that the best resize process is to double the size of the existing
-	 * array.
-	 * In this assignment, you do not need to similarly reduce the size of the array
-	 * when skiers are removed.
-	 */
-		if (count <skiers.length) {
-				skiers[count] = skier;
+		if(count < skiers.length) {
+			skiers[count] = skier;
 		}else {
-			Skier[] temp = new Skier[count*2];
-			for(int i=0; i<count; i++){
+			Skier[] temp = new Skier[skiers.length*2];
+			
+			for(int i = 0; i < skiers.length; i++) {
 				temp[i] = skiers[i];
-		}
-		skiers = new Skier[count*2];
-		for (int j= 0; j<=count; j++){
-			if (j<count){
-				skiers[j] = temp[j];
-			} else if (j==count){
-				skiers[j] = skier;
-				}
 			}
+			
+			temp[count] = skier;
+			skiers = temp;
 		}
-	    count = count+1;
-      
+	    	count = count+1;
 	}
 	
 	//Determines if the skier is in the list. If they are in the list, then the index location is returned. 
 	//If they are not, then -1 is returned.
 	public int findSkier(Skier skier) {
-		// Programmer note: The following is a placeholder.
-		for (int i= 0; i<skiers.length; i++) {
-			if (skiers [i].getName().equals(skier.getName())) {
-				int x = i;
-				return x;
-		    }
+		for(int i = 0; i < skiers.length; i++) {
+			if(skiers[i].getName().equals(skier.getName())) {
+				return i;
+		    	}
 		}
 		return -1;
 	}
-
-	/**
-	 * Used primarily as a test harness for the class.
-	 * @param args Not used.
- 	 */
+	
 	public static void main(String[] args) {
 		System.out.println("Testing the SkierList class.");
 		SkierList list = null;

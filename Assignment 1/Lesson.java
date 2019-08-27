@@ -1,44 +1,23 @@
-//Che-Chi Jack Liu
+//Che-Chi (Jack) Liu
 //V00850558
-
 
 /*
  * Class Lesson is a Ski lesson for a certain level of skiers. It may be empty or contain a number of ski students. 
  * In this version of the class, there is no limit to the number of students in the lesson.
  */
- 
-public class Lesson {
 
-	/*
-	 * Programmer note:
-	 * the following static final array is a nice lookup array to
-	 * match the level numbers to the level names.
-	 * Note that the index of a name in the array is exactly the
-	 * the level number for that name.
-	 * Because this particular lookup array is immutable and
-	 * there only needs to be one copy for any number of Lesson objects,
-	 * we use the 'final' and 'static'.
-	 */
+public class Lesson {
 	private static final String[] levelNames = 
 		{"Beginner", "Novice", "Snowplower", "Intermediate", "Advanced"};
-	// Programmer note: Do not alter the following instance variables.
+		//Lv. 0	      Lv. 1     Lv. 2	      Lv.3	      Lv. 4
+	
 	private int lessonLevel; // level of the Lesson, not necessarily all the skiers
 	private String lessonName; // One of the names in levelNames array above.
 	private SkierList students; // The list of skiers registered for this lesson.
-
-/*
- * Programmer note: Each of the methods below are not complete and
- * need to be implemented by you.
- * Make sure you provide method header comments and provide
- * the implementation code.
- * Make sure you test regularly for compilation and errors.
- * It is recommended that you reference teh completed main method,
- * where each of your methods is tested;
- * follow that ordering so you can monitor your progress.
- */
+	
 	//Creates a lesson for a given level
 	public Lesson(int level) {
-		if (level < 0 || level > 4) {
+		if(level < 0 || level > 4) {
 			lessonName = levelNames[0];
 			students = new SkierList();
 			lessonLevel = 0;
@@ -51,7 +30,7 @@ public class Lesson {
 	
 	//Creates a lesson for the given level, and populates the lesson with Skiers.
 	public Lesson(int level, SkierList students) {
-		if (level < 0 || level > 4) {
+		if(level < 0 || level > 4) {
 			lessonName = levelNames[0];
 			lessonLevel = 0;
 			this.students = students;
@@ -64,47 +43,47 @@ public class Lesson {
 	
 	//Sets the lesson name based on the level of the students.
 	public void setLessonLevel(int level) {
-		if (level < 0 || level > 4) {
-			
+		if(level < 0 || level > 4) {
+			System.out.println("The input level is out of range, the level remains unchanged.");
 		}else {
 			lessonName = levelNames[level];
 			lessonLevel = level;
 		}
 	}
 	
-	//The group name of the lesson
+	//Returns the group name of the lesson
 	public String getName() {
-		// Programmer note: The return statement is only a placeholder.
 		return lessonName;
 	}
 	
-	//The number of skiing students in the lesson.
+	//Returns the number of skiing students in the lesson.
 	public int numStudents() {
-		// Programmer note: The return statement is only a placeholder.
 		return students.size();
 	}
 	
 	//Adds a new skier to the list. Before adding the skier to the lesson, the skier's level is updated to fit the level of the lesson.
 	public void addSkier(Skier skier) {
-		students.add(new Skier(skier.getName(), lessonLevel));
+		if(isRegistered(skier)) {
+			System.out.println("Skier is in this lesson already, nothing is added.");
+		}else {
+			students.add(new Skier(skier.getName(), lessonLevel));
+		}
 	}
 	
 	//Removes a skier from the lesson. If the skier is not in the lesson, then nothing is removed.
 	public void removeSkier(Skier skier) {
-		int index = 0;
-			for(int i = 0; i<students.size(); i++){
-				if(skier == students.get(i)){
-					index = i;
-					students.remove(index);
-				}
-			}
+		if(!isRegistered(skier)) {
+			System.out.println("Skier is not in this lesson, nothing is removed.");
+		}else {
+			int index = students.findSkier(skier);
+			students.remove(index);
+		}
 	}
 	
 	//Determines whether a particular skier is registered for this Lesson.
 	public boolean isRegistered(Skier skier) {
-		// Programmer note: The return statement is only a placeholder.
-		for(int i = 0; i<students.size(); i++){
-			if(skier == students.get(i)) {
+		for(int i = 0; i < students.size(); i++) {
+			if(skier.equals(students.get(i))) {
 				return true;
 			}
 		}
@@ -113,20 +92,18 @@ public class Lesson {
 	
 	//Prints a list of the students
 	public String toString() {
-		// Programmer note: The return statement is only a placeholder.
 		Skier tem;
 		String result = "";
-		for(int i=0; i<students.size(); i++){
-			tem =students.get(i);
-			result +=tem.getName()+": "+levelNames[tem.getLevel()]+" ";
+		result += (lessonName+" group:"+"\n");
+		
+		for(int i = 0; i < students.size(); i++) {
+			tem = students.get(i);
+			result += tem.getName()+" (level "+tem.getLevel()+")"+"\n";
 		}
+		
 		return result;
 	}
-
-	/**
-	 * Used as a test harness for the class.
-	 * @param args Not used.
-	 */
+	
 	public static void main(String[] args) {
 		System.out.println("Testing the Lesson class.");
 		Lesson lesson = null;

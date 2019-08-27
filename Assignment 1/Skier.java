@@ -1,6 +1,5 @@
-//Che-Chi Jack Liu
+//Che-Chi (Jack) Liu
 //V00850558
-
 
 /*
  * Class Skier consists of the name of a skier and the current level of expertise, 
@@ -10,31 +9,19 @@
  */
 
 public class Skier {
-
-	// Programmer note: Do not alter the following instance variables.
 	private String name; // the unique name of the skier
 	private int level; // level of skill
-
-/*
- * Programmer note:  Each of the methods below are not complete and
- * need to be implemented by you.
- * Make sure you provide method header comments and provide
- * the implementation code. 
- * Make sure you test regularly for compilation and errors,
- * It is recommended that you reference the completed main method,
- * where each of your methods is tested;
- * follow that ordering so lyou can monitor your progress.
- */
 	
 	//Creates a level 0 Skier.
 	public Skier(String name) {
 		this.name = name;
+		level = 0;
 	}
 	
 	//Creates a Skier at the given level.
 	public Skier(String name, int level) {
 		this.name = name;
-		if (level < 0 || level > 4) {
+		if(level < 0 || level > 4) {
 			this.level = 0;
 		}else {
 			this.level = level;
@@ -46,38 +33,34 @@ public class Skier {
 		this.name = name;
 	}
 	
-	//The skier's name.
+	//Returns the skier's name.
 	public String getName() {
-		// programmer note, the return statement is only a placeholder so compilation works.
 		return name;
 	}
 	
 	//Sets the level for the skier.
 	public void setLevel(int level) {
 		if (level < 0 || level > 4) {
-				//Error
+			System.out.println("The input level is not between 0 and 4, the current level remains unchanged.");
 		}else {
 			this.level = level;
 		}
 	}
-
-	//The current level of the skier.
+	
+	//Returns the current level of the skier.
 	public int getLevel() {
-		// programmer note: The return statement is only a placeholder.
 		return level;
 	}
 	
-	//Determines if two skier objects are equivalent. For our purposes, 
-	//they are equal if they have the same name.
+	//Determines if two skier objects are equivalent.
+	//For our purposes, they are equal if they have the same name.
 	public boolean equals(Skier other) {
-		// programmer note: The return statement is only a placeholder.
-		return this.name == other.name;
+		return this.name.equals(other.name);
 	}
 	
 	//A String representation of the skier.
 	public String toString() {
-		// programmer note: The return statement is only a placeholder.
-		return this.name + "(level "+this.level+ ")" ;
+		return this.name+" (level "+this.level+")";
 	}
 
 	public static void main(String[] args) {
@@ -130,4 +113,3 @@ public class Skier {
 		System.out.println("All tests passed.");
 	}
 }
-	

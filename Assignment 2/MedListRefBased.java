@@ -154,61 +154,34 @@ public class MedListRefBased implements List<Medication> {
 	
 	public static void main(String[] args) {
 		MedListRefBased list = new MedListRefBased();
-		list.add(new Medication("acetominophen",100),0);
+		list.add(new Medication("meperidine",100),0);
 		list.add(new Medication("acetylsalicylic acid",325),0);
 		list.add(new Medication("acetominophen",100),0);
-		list.add(new Medication("X",1),2);
+		list.add(new Medication("cimetidine",150),3);
 		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("cimetidine", 5800),3);
-		
 		System.out.println("The list should be {meperidine,acetominophen,asa,meperidine,cimetidine}");
 		System.out.println(list);
-		
-		System.out.println("Removing X");
-		list.remove(new Medication("X",1));
-		System.out.println(list);
-		System.out.println("removing item!");
-		list.remove(0);
-		list.remove(3);
-		System.out.println(list);
-		
-		System.out.println("removing all items from list \n");
-		list.removeAll();
-		
-		System.out.println("is the list empty?\n");
-		System.out.println(list.isEmpty());
-		
-		System.out.println("adding more medication");
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("X",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("cimetidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",100),0);
-		
-		System.out.println(list);
-		
-		System.out.println("Testing find method, looking for X.");
-		System.out.println("The index find method should return a index.");
-		
-		Medication x = new Medication("X", 100);
-		System.out.println("The index returned was "+list.find(x));
-		
-		
-		System.out.println("Removing all of the meperidine at once");
-		list.remove(new Medication("meperidine",100));
-		System.out.println(list);
+		list.printArray();
+		// check to make sure the private shift methods work:
+		System.out.println("After sliding everything right from the second spot:");
+		list.slideRightFrom(1);
+		list.printArray();
+		// The list thinks its longer now.	
+		list.count++;
+		System.out.println("list version: "+list);
+		System.out.println("After sliding them back again:");
+		list.slideLeftTo(1);
+		list.count--;
+		list.printArray();
+		System.out.println("list version: "+list);
 
-		System.out.println("Number of nodes: "+ (list.size()));		
+		list.remove(new Medication("meperidine",100));
+		System.out.println("After removing meperidine:");
+		System.out.println(list);
+		System.out.println("The number of elements is "+list.size());
+		list.removeAll();
+		System.out.println("After removing all the elements:");
+		System.out.println(list);
+		System.out.println("The number of elements is now "+list.size());
 	}
 }

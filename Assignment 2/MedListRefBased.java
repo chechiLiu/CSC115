@@ -170,8 +170,6 @@ public class MedListRefBased implements List<Medication> {
 		
 		list.removeAll();
 		System.out.println("After removing all the elements:");
-		
-		System.out.println(list);
 		System.out.println("The number of elements is now "+list.size());
 		
 		System.out.println("is the list empty?\n");

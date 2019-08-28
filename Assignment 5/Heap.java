@@ -1,14 +1,14 @@
 //Che-Chi (Jack) Liu
 //V00850558
 
-import java.util.NoSuchElementException;
-
 /*
  * The Heap is a binary tree data structure that has both a structural and ordering property.
  * 	The structural property is that it is a complete tree, meaning that for each level k, except the lowest level, there are exactly 2k-1 nodes at that level. The lowest level has all its nodes as far left as possible.
  * 	The ordering property is that for every node n in the tree, the comparable item contained in that node comes before the items in both the left and right child of n.
  * The elements in the Heap must be of type Comparable. Java generics are not used here; it is up to the user to cast items to their orignal subclass.
  */
+
+import java.util.NoSuchElementException;
 
 @SuppressWarnings({"unchecked"})
 

@@ -176,26 +176,5 @@ public class MedListRefBased implements List<Medication> {
 		
 		System.out.println("is the list empty?\n");
 		System.out.println(list.isEmpty());
-		
-		System.out.println("adding more medication");
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("meperidine",12),0);
-		list.add(new Medication("cimetidine",1),0);
-		list.add(new Medication("meperidine",10),0);
-		list.add(new Medication("meperidine",100),0);
-		list.add(new Medication("X",111),0);
-		
-		System.out.println(list);
-		System.out.println("Testing find method, looking for X.");
-		System.out.println("The index find method should return a index.");
-		
-		Medication x = new Medication("X", 111);
-		System.out.println("The index returned was "+list.find(x));
-		
-		System.out.println("Removing all of the meperidine at once");
-		list.remove(new Medication("meperidine",100));
-		System.out.println(list);
-		
-		System.out.println("The number of elements is now "+list.size());
 	}
 }

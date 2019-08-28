@@ -1,26 +1,50 @@
-//Che-Chi Jack Liu
+//Che-Chi (Jack) Liu
 //V00850558
 
-
 public class MedListRefBased implements List<Medication> {
-	
 	private int count;        
-    private MedicationNode head;     
-
+    	private MedicationNode head;     
+	
+	//Creates and initializes an empty List of Medication objects.
 	public MedListRefBased() {
-        head  = new MedicationNode(null);
+        	head  = new MedicationNode(null);
 		count = 0;
-    }
-
-	 
+    	}
+	
+	//Inserts an item into the list at postion index.
 	public void add(Medication item, int index) {
-		
-		if (index < 0 || index > count) {
+		if(index < 0 || index > count) {
 			throw new ListIndexOutOfBoundsException("The index "+index+" is out of bounds.");
 		}
 		
-		if (head == null) {
-			throw new ListIndexOutOfBoundsException("There exits no linked list");
+		MedicationNode curr = head;
+		int i = 0;
+
+		while(i < index) {
+			curr = curr.next;
+			i++;
+		}
+		
+		if(curr.prev == null) {
+			MedicationNode newLink = new MedicationNode(item, null, curr);
+			curr.prev = newLink;
+			head = newLink;
+		}else {
+			MedicationNode newLink = new MedicationNode(item, curr.prev, curr);
+			curr.prev.next = newLink;
+			curr.prev = newLink;
+		}
+		count++;
+	}	
+	
+	//Removes all matching items from the list.
+	public void remove(int index) {
+		if(index < 0 || index > count-1) {
+			throw new ListIndexOutOfBoundsException("The index "+index+" is out of bounds.");
+		}
+		
+		if(head == null) {
+			throw new ListIndexOutOfBoundsException("The list is empty.");
 		}
 		
 		MedicationNode curr = head;
@@ -31,107 +55,76 @@ public class MedListRefBased implements List<Medication> {
 			i++;
 		}
 		
-		if(curr.prev == null) {
-			MedicationNode newLink = new MedicationNode(item, null, curr);
-			curr.prev = newLink;
-			head = newLink;
-		}
-		
-		else {
-			MedicationNode newLink = new MedicationNode(item, curr.prev, curr);
-			curr.prev.next = newLink;
-			curr.prev = newLink;
-		}
-		count++;
-	}	
-	 
-	public void remove(int index) {
-		
-		if (index < 0 || index > count-1) {
-			throw new ListIndexOutOfBoundsException("The index "+index+" is out of bounds.");
-		}
-		
-		if (head == null) {
-			throw new ListIndexOutOfBoundsException("There exits no linked list");
-		}
-		
-		MedicationNode curr = head;
-		int i = 0;
-		
-		while (i < index) {
-			curr = curr.next;
-			i++;
-		}
-		
 		if(curr.next == null) {
 			curr.prev.next = null;
 		}
-		
-		else if (curr.prev == null) {
+		else if(curr.prev == null) {
 			curr = curr.next;
 			curr.prev = null;
 			head = curr;
 		}
-		
 		else {
 			curr.prev.next = curr.next;
 			curr.next.prev = curr.prev;
 		}
 		count--;
 	}
-
-		
-	public Medication get (int index) {
-		if (index < 0 || index > count-1) {
+	
+	//Accesses the item by its position in the list.
+	public Medication get(int index) {
+		if(index < 0 || index > count-1) {
 			throw new ListIndexOutOfBoundsException("The index "+index+" is out of bounds.");
 		}
+		
 		MedicationNode curr = head;
-		int i= 0;
-		while(i<index){
+		int i = 0;
+		
+		while(i < index) {
 			curr = curr.next;
-		    i++;
+		    	i++;
 		}
+		
 		return curr.item;
 	}
-	
 
+	//Returns true if the list is empty, false otherwise.
 	public boolean isEmpty() {
 		return head == null;
 	}
 	
-	
+	//Returns the number of items in the list.
 	public int size() {
 		return count;
 	}
 
-	
+	//Determines if the equivalent item is in the list. 
+	//If it is in the list, then the index location is returned. If it is not, then -1 is returned.
 	public int find(Medication item) {
 		MedicationNode curr = head;
-		for(int i = 0; i < count; i++){
-			if(curr.item.equals(item)){
-			return i;
+		for(int i = 0; i < count; i++) {
+			if(curr.item.equals(item)) {
+				return i;
 			}
 			curr = curr.next;
 		}
 		return -1;
 	}
 	
-	
+	//Removes all the items from the list, resulting in an empty list.
 	public void removeAll() {
 		head = null;
 		count = 0;
 	}
-
-
+	
+	//Removes all matching items from the list.
 	public void remove(Medication item) {
 		MedicationNode curr = head;
-		while (curr != null) {
-			if (curr.item.equals(item)) {
-				
+		while(curr != null) {
+			if(curr.item.equals(item)) {
 				if(curr.next == null) {
 					curr.prev.next = null;
 				}
-				else if (curr.prev == null) {
+				else if(curr.prev == null) {
 					curr = curr.next;
 					curr.prev = null;
 					head = curr;
@@ -147,19 +140,17 @@ public class MedListRefBased implements List<Medication> {
 			curr = curr.next;
 		}
 	}
-
-
 	
+	//A printout of the list
 	public String toString() {
 		MedicationNode curr = head;
 		String medString = "";
-		while(curr != null){
+		while(curr != null) {
 			medString += "\t"+curr.item+"\n";
 			curr = curr.next;
 		}
 		return ("list: {\n"+medString);
 	}
-	
 	
 	public static void main(String[] args) {
 		MedListRefBased list = new MedListRefBased();
@@ -186,7 +177,6 @@ public class MedListRefBased implements List<Medication> {
 		
 		System.out.println("is the list empty?\n");
 		System.out.println(list.isEmpty());
-		
 		
 		System.out.println("adding more medication");
 		list.add(new Medication("meperidine",100),0);
@@ -219,7 +209,6 @@ public class MedListRefBased implements List<Medication> {
 		list.remove(new Medication("meperidine",100));
 		System.out.println(list);
 
-		System.out.println("Number of nodes: "+ (list.size()));
-		
+		System.out.println("Number of nodes: "+ (list.size()));		
 	}
-}	
+}

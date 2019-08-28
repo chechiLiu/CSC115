@@ -86,7 +86,7 @@ public class MedListRefBased implements List<Medication> {
 		
 		return curr.item;
 	}
-
+	
 	//Returns true if the list is empty, false otherwise.
 	public boolean isEmpty() {
 		return head == null;
@@ -96,7 +96,7 @@ public class MedListRefBased implements List<Medication> {
 	public int size() {
 		return count;
 	}
-
+	
 	//Determines if the equivalent item is in the list. 
 	//If it is in the list, then the index location is returned. If it is not, then -1 is returned.
 	public int find(Medication item) {
@@ -145,11 +145,11 @@ public class MedListRefBased implements List<Medication> {
 	public String toString() {
 		MedicationNode curr = head;
 		String medString = "";
-		while(curr != null) {
+		while(curr.item != null) {
 			medString += "\t"+curr.item+"\n";
 			curr = curr.next;
 		}
-		return ("list: {\n"+medString);
+		return "list: {\n"+medString+"\t}";
 	}
 	
 	public static void main(String[] args) {

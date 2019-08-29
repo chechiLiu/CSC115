@@ -36,6 +36,7 @@ public class ArithExpression {
 	 * an operator, a paren or a operand.
 	 * @param express The string that is assumed to be an arithmetic expression.
 	 */
+	//Method provided
 	private void tokenizeInfix(String express) {
 		infixTokens  = new TokenList(express.length());
 

@@ -34,3 +34,5 @@ Class 14: Algorithm Efficiency
 Class 15: Sequential, Binary search & Selection, Bubble, Insertion, Merge, Quick, Radix, Heap, and Tree sort
 
 Class 16: Generics & Abstract classes & Java Collection's "List" interface & Iterators
+
+Class 17: Tables & Priority Queues

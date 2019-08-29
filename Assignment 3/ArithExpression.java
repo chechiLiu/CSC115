@@ -25,7 +25,6 @@ public class ArithExpression {
 		}
 	}
 	
-	//Provided
 	/*
 	 * A private helper method that tokenizes a string by separating out
 	 * any arithmetic operators or parens from the rest of the string.

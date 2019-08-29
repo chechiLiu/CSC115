@@ -36,3 +36,5 @@ Class 15: Sequential, Binary search & Selection, Bubble, Insertion, Merge, Quick
 Class 16: Generics & Abstract classes & Java Collection's "List" interface & Iterators
 
 Class 17: Tables & Priority Queues
+
+Class 18: Hashing
